@@ -2,7 +2,7 @@
 /**
  * @author		James Mills
  * @copyright	Copyright (c) 2008 - 2010, JGM Web Design
- * @link		http://www.jgmwebdesign.co.uk.com
+ * @link		http://www.jgmwebdesign.co.uk
  * @since		Version 1.0
  */
 
