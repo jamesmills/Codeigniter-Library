@@ -1,0 +1,20 @@
+h1. Personal Codeigniter libraries and helpers
+
+This is a set of libraries and helpers that I use in all my projects so I thought it was about time to centralize it all and also share it...
+
+* An easily customizable grid
+* Sensible default typography
+* A typographic baseline
+* Perfected browser CSS reset
+* A stylesheet for printing
+* Powerful scripts for customization
+* Absolutely no bloat!
+
+h2. How to use
+
+[code]
+$this->load->library('text_formatting');
+//$my_sql_datetime = '2010-10-04 22:25:15';
+echo $this->text_formatting->date_special($my_sql_datetime);
+[/code]
+
