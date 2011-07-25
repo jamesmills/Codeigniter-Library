@@ -2,19 +2,21 @@ h1. Personal Codeigniter libraries and helpers
 
 This is a set of libraries and helpers that I use in all my projects so I thought it was about time to centralize it all and also share it...
 
-* An easily customizable grid
-* Sensible default typography
-* A typographic baseline
-* Perfected browser CSS reset
-* A stylesheet for printing
-* Powerful scripts for customization
-* Absolutely no bloat!
+* *text_formatting* - Make a MySQL DATETIME stamp look a little nicer!
 
-h2. How to use
+h2. text_formatting
 
-[code]
+This will take a MySQL DATETIME stamp or whatever and will format it. 
+* If the date+time is within the last few minuets it will return '<span class="nice_justnow">Just now! (2:30pm)</span>'
+* If the date+time was today it will return '<span class="nice_today">Today</span>'
+* If the date+time was yesterday it will return '<span class="nice_yesterday">Yesterday</span>'
+* If the date+time is tomorrow it will return Tomorrow ' . date("g:ia", $my_date)
+
+ (For today, yesterday and tomorrow - if there is a time it will also output the time)
+
+<pre><code>
 $this->load->library('text_formatting');
 //$my_sql_datetime = '2010-10-04 22:25:15';
 echo $this->text_formatting->date_special($my_sql_datetime);
-[/code]
+</code></pre>
 
