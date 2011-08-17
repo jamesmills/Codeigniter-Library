@@ -13,6 +13,7 @@ class Text_formatting {
 
 	function __construct()
 	{
+		// @todo - this note does nothing
 	
 	}
 
