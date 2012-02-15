@@ -1,33 +1,31 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * @author		James Mills
- * @copyright	Copyright (c) 2008 - 2010, JGM Web Design
- * @link		http://www.jgmwebdesign.co.uk
- * @since		Version 1.0
- */
 
-// ------------------------------------------------------------------------
+/**
+ * Text formatting library
+ *
+ * Basic formatting of certain things that you will want to do over and over again.
+ * Main use is for returning a MySQL date as 'Today ' or 'Just now!' with optional time
+ * @author James Millr <james@jamesmills.co.uk>
+ * @version 1.0
+ * @package JGMCore
+ */
 
 class Text_formatting {
 
-
 	function __construct()
 	{
-	
+
 	}
 
-	// --------------------------------------------------------------------
-
-	/**
-	 * Format the date to look nice and add Today or yesterday to the output!
-	 *
-	 * Will return a string
-	 *
-	 * @access	public
-	 * @return	array
-	 */
-
-	public function date_special($my_date, $my_format = 'l jS F Y')
+    /**
+     * Format the date to look nice and add Today or yesterday to the output!
+     * @results string $myOutputDate this is actually what is returned
+     * @param string $my_date the date in original format
+     * @param integer $time bool to set if to return the time in brackets with nice date
+     * @param string $my_format format to return the date in if different from default
+     * @return string
+     */
+	function date_special($my_date, $time = 0, $my_format = 'l jS F Y')
 	{
 	
 		if ($my_date == "0000-00-00 00:00:00" || $my_date == "")
@@ -49,7 +47,12 @@ class Text_formatting {
 			{
 				if($my_date > (time() - (60*5)))
 				{
-					$myOutputDate = '<span class="nice_justnow">Just now! (' . date("g:ia", $my_date) . ')</span>';
+					$myOutputDate = '<span class="nice_justnow">Just now!';
+                    if($time === 1)
+                    {
+                        $myOutputDate .= '(' . date("g:ia", $my_date) . ')';
+                    }
+                    $myOutputDate .= ' </span>';
 				}
 				else
 				{
@@ -59,7 +62,12 @@ class Text_formatting {
 					}
 					else
 					{
-						$myOutputDate = '<span class="nice_today">Today (' . date("g:ia", $my_date) . ')</span>';
+						$myOutputDate = '<span class="nice_today">Today';
+                        if($time === 1)
+                        {
+                            $myOutputDate .= ' (' . date("g:ia", $my_date) . ')';
+                        }
+                        $myOutputDate .= '</span>';
 					}
 				}
 			}
@@ -67,17 +75,29 @@ class Text_formatting {
 			{
 				if (date("h:i:s", $my_date) == "12:00:00")
 				{
+
 					$myOutputDate = '<span class="nice_yesterday">Yesterday</span>';
 				}
 				else
 				{
-					$myOutputDate = '<span class="nice_yesterday">Yesterday (' . date("g:ia", $my_date) . ')</span>';
+                    $myOutputDate = '<span class="nice_yesterday">Yesterday';
+                    if($time === 1)
+                    {
+                        $myOutputDate .= ' (' . date("g:ia", $my_date) . ')';
+                    }
+                    $myOutputDate .= '</span>';
+
 				}
 				
 			}
 			else if($my_date > $today && $my_date < $tomorrow_plus_one )
 			{
-				$myOutputDate = 'Tomorrow ' . date("g:ia", $my_date);
+				$myOutputDate = '<span class="nice_tomorrow">Tomorrow';
+                if($time === 1)
+                {
+                    $myOutputDate .= ' (' . date("g:ia", $my_date) . ')';
+                }
+                $myOutputDate .= '</span>';
 			}
 			else
 			{
@@ -88,16 +108,5 @@ class Text_formatting {
 	
 		return $myOutputDate;
 	}
-	
-	
-	
-
-
-
-
 
 }
-// END Text_formatting Class
-
-/* End of file test_formatting.php */
-/* Location: ./application/libraries/test_formatting.php */
